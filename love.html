@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>给你的爱心</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ff9a9e 0%, #fecfef 30%, #f5576c 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    }
+    .text {
+      position: absolute;
+      top: 15%;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      padding: 0 16px;
+    }
+    .text h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.4rem;
+    }
+    .text p {
+      font-size: 1.1rem;
+      opacity: .9;
+    }
+    @media (min-width: 768px) {
+      .text h1 { font-size: 3rem; }
+      .text p { font-size: 1.3rem; }
+    }
+
+    .heart-container {
+      position: relative;
+      width: 220px;
+      height: 200px;
+      animation: beat 1s infinite ease-in-out;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,0.35));
+    }
+
+    .heart {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle at 30% 30%, #ffe6f7 0%, #ff3366 45%, #c4004f 100%);
+      transform: rotate(-45deg);
+      border-radius: 32px;
+      left: 50%;
+      top: 50%;
+      transform-origin: center;
+      translate: -50% -50%;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -60px;
+      left: 0;
+    }
+    .heart::after {
+      left: 60px;
+      top: 0;
+    }
+
+    .small-heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, #fff0fa 0%, #ff5c8a 50%, #c4004f 100%);
+      transform: rotate(-45deg);
+      border-radius: 12px;
+      opacity: 0;
+      animation: float 4s linear infinite;
+    }
+    .small-heart::before,
+    .small-heart::after {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .small-heart::before {
+      top: -20px;
+      left: 0;
+    }
+    .small-heart::after {
+      left: 20px;
+      top: 0;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(0.97); }
+      75% { transform: scale(1.06); }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.6);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      60% { opacity: 1; }
+      100% {
+        transform: translate3d(0, -180px, 0) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text">
+    <h1> ♡</h1>
+    <p>不管你什么时候点开，我都在这儿喜欢你。</p>
+  </div>
+  <div class="heart-container">
+    <div class="heart"></div>
+  </div>
+
+  <script>
+    function createHeart(delay, left) {
+      const h = document.createElement('div');
+      h.className = 'small-heart';
+      h.style.left = left + '%';
+      h.style.bottom = '-40px';
+      h.style.animationDelay = delay + 's';
+      document.body.appendChild(h);
+    }
+
+    // 固定生成一些爱心，循环漂浮
+    for (let i = 0; i < 20; i++) {
+      const delay = Math.random() * 4;
+      const left = 10 + Math.random() * 80;
+      createHeart(delay, left);
+    }
+  </script>
+</body>
+</html>
